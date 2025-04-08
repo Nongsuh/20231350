@@ -1,1 +1,156 @@
+1. class ListQueue:
+    def __init__(self):
+        self.__queue = []
+    
+    def enqueue(self, x):
+        self.__queue.insert(0, x)
+    
+    def dequeue(self):
+        return self.__queue.pop(len(self.__queue)-1)
+    
+    def isEmpty(self)->bool:
+        return len(self.__queue) == 0
+    
+    def dequeueAll(self):
+        self.__queue.clear()
 
+2. class ListQueue:
+    def __init__(self):
+        self.__queue = []
+    
+    def enqueue(self, x):
+        self.__queue.insert(0, x)
+    
+    def dequeue(self):
+        return self.__queue.pop(len(self.__queue)-1)
+    
+    def isEmpty(self)->bool:
+        return len(self.__queue) == 0
+    
+    def dequeueAll(self):
+        self.__queue.clear()
+
+def check_symmetry(s:str)->bool:
+    queue = ListQueue()
+    i=0
+
+    while i < len(s) and s[i] != '$':
+        queue.enqueue(s[i])
+        i += 1
+    
+    if i==len(s) or i==len(s)-1:
+        return False
+    
+    i += 1
+
+    while i<len(s):
+        if queue.isEmpty():
+            return False
+        if s[i] != queue.dequeue():
+            return False
+        i += 1
+
+    return queue.isEmpty()
+
+3. def copyQueue(a):
+    b=LinkedQueue()
+    temp=LinkedQueue()
+
+    while not a.isEmpty():
+        item=a.dequeue()
+        b.enqueue(item)
+        temp.enqueue(item)
+    
+    while not temp.isEmpty():
+        a.enqueue(temp.dequeue())
+    
+    return b
+4. class StackWithQueue:
+    def __init__(self):
+        self.queue1=ListQueue()
+        self.queue2=ListQueue()
+
+    def push(self, x):
+        self.queue1.enqueue(x)
+    
+    def pop(self):
+        if self.queue1.is_empty():
+            return None
+        
+        while self.queue1.size() > 1:
+            self.queue2.enqueue(self.queue1.dequeue())
+
+        value= self.queue1.dequeue()
+
+        while not self.queue2.is_empty():
+            self.queue1.enqueue(self.queue2.dequeue())
+
+        return value
+
+5. class StackQueue:
+    def __init__(self):
+        self.s1 = []
+        self.s2 = []
+
+    def enqueue(self, x):
+        self.s1.append(x)
+
+    def dequeue(self):
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        if not self.s2:
+            raise IndexError("empty queue")
+        return self.s2.pop()
+
+6. enqueueFront()는 상수시간 O(1)
+   enqueueTail()는 상수시간 O(1)
+   dequeueFront()는 상수시간 O(1)
+   dequeueTail()는 선형시간 O(n) 
+
+7. enqueueFront()는 상수시간 O(1)
+   enqueueTail()는 선형시간 O(n)
+   dequeueFront()는 상수시간 O(1)
+   dequeueTail()는 선형시간 O(n) 
+
+8. class Deque:
+    def __init__(self):
+        self.__queue = []
+
+    def enqueueFront(self, x):
+        self.__queue.insert(0, x) 
+
+    def enqueueTail(self, x):
+        self.__queue.append(x)  
+
+    def dequeueFront(self):
+        if self.isEmpty():
+            raise IndexError("Deque is empty")
+        return self.__queue.pop(0)  
+
+    def dequeueTail(self):
+        if self.isEmpty():
+            raise IndexError("Deque is empty")
+        return self.__queue.pop() 
+
+    def front(self):
+        if self.isEmpty():
+            return None
+        return self.__queue[0]
+
+    def rear(self):
+        if self.isEmpty():
+            return None
+        return self.__queue[-1]
+
+    def isEmpty(self) -> bool:
+        return len(self.__queue) == 0
+
+    def dequeueAll(self):
+        self.__queue.clear()
+
+    def printDeque(self):
+        print("Deque from front:", end='')
+        for item in self.__queue:
+            print(" ", item, end='')
+        print()
